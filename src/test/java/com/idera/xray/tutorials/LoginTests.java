@@ -2,9 +2,7 @@ package com.idera.xray.tutorials;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,12 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
-import app.getxray.xray.junit.customjunitxml.XrayTestReporter;
-import app.getxray.xray.junit.customjunitxml.XrayTestReporterParameterResolver;
-import app.getxray.xray.junit.customjunitxml.annotations.Requirement;
-import app.getxray.xray.junit.customjunitxml.annotations.XrayTest;
-
-@ExtendWith(XrayTestReporterParameterResolver.class)
 public class LoginTests {
     WebDriver driver;
     RepositoryParser repo;
@@ -45,8 +37,6 @@ public class LoginTests {
     }
     
     @Test
-    @XrayTest(key = "XT-307")
-    @Requirement("XT-10")
     public void successLogin()
     {
         LoginPage loginPage = new LoginPage(driver).open();
@@ -57,16 +47,14 @@ public class LoginTests {
     }
 
     @Test
-    @XrayTest(summary = "invalid login test", description = "login attempt with invalid credentials")
-    public void nosuccessLogin(XrayTestReporter xrayReporter)
+    public void nosuccessLogin()
     {
         LoginPage loginPage = new LoginPage(driver).open();
         assertTrue(loginPage.isVisible());
         LoginResultsPage loginResultsPage = loginPage.login("demo", "invalid");
         TakesScreenshot screenshotTaker =((TakesScreenshot)driver);
         File screenshot = screenshotTaker.getScreenshotAs(OutputType.FILE);
-        xrayReporter.addTestRunEvidence(screenshot.getAbsolutePath());
-        xrayReporter.addComment("auth should have failed");
+        System.out.println(screenshot.getAbsolutePath());
         assertEquals(loginResultsPage.getTitle(), repo.getBy("expected.error.title"));
         assertTrue(loginResultsPage.contains(repo.getBy("expected.login.failed")));
     }
