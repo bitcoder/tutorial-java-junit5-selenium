@@ -2,7 +2,6 @@ package com.idera.xray.tutorials;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.OutputType;
@@ -10,8 +9,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.junit.jupiter.api.Assertions.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,8 +42,8 @@ public class LoginTests {
     }
     
     @Test
-    @XrayTest(key = "XT-307")
-    @Requirement("XT-10")
+    @XrayTest(key = "CALC-2702")
+    @Requirement("CALC-2703")
     public void successLogin()
     {
         LoginPage loginPage = new LoginPage(driver).open();
