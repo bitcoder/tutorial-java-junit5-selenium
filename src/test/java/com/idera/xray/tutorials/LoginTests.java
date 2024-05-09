@@ -20,7 +20,7 @@ import app.getxray.xray.junit.customjunitxml.annotations.Requirement;
 import app.getxray.xray.junit.customjunitxml.annotations.XrayTest;
 
 @ExtendWith(XrayTestReporterParameterResolver.class)
-public class LoginTests {
+class LoginTests {
     WebDriver driver;
     RepositoryParser repo;
 
@@ -41,10 +41,27 @@ public class LoginTests {
         repo = null;
     }
     
+
+    /*
+     * this is a typical test implement in JUnit
+     * a new Generic Test will be created in Xray, unless one already exists for the same package name + method name
+     */
+    @Test
+    void loginPageOpens()
+    {
+        LoginPage loginPage = new LoginPage(driver).open();
+        assertTrue(loginPage.isVisible());
+    }
+
+
+    /*
+     * this test will report results against an existing Test in Xray
+     * it will also link the test to a requirement/story in Jira
+     */
     @Test
     @XrayTest(key = "CALC-2702")
     @Requirement("CALC-2703")
-    public void successLogin()
+    void successLogin()
     {
         LoginPage loginPage = new LoginPage(driver).open();
         assertTrue(loginPage.isVisible());
@@ -53,9 +70,12 @@ public class LoginTests {
         assertTrue(loginResultsPage.contains(repo.getBy("expected.login.success")));
     }
 
+    /*
+     * this test will report results for a new Test that will be created in Xray, unless it already exists with the same summary
+     */
     @Test
     @XrayTest(summary = "invalid login test", description = "login attempt with invalid credentials")
-    public void nosuccessLogin(XrayTestReporter xrayReporter)
+    void nosuccessLogin(XrayTestReporter xrayReporter)
     {
         LoginPage loginPage = new LoginPage(driver).open();
         assertTrue(loginPage.isVisible());

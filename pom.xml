@@ -97,14 +97,14 @@
         <dependency>
             <groupId>app.getxray</groupId>
             <artifactId>xray-junit-extensions</artifactId>
-            <version>0.6.0</version>
+            <version>0.8.0</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>app.getxray</groupId>
             <artifactId>xray-maven-plugin</artifactId>
-            <version>0.7.2</version>
+            <version>0.7.5</version>
         </dependency>
 
         <dependency>
@@ -115,29 +115,6 @@
         </dependency>
         
     </dependencies>
-    <!--
-    <repositories>
-        <repository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Xray-App/*</url>
-            <snapshots>
-              <enabled>true</enabled>
-              <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>github</id>
-            <url>https://maven.pkg.github.com/Xray-App/*</url>
-            <snapshots>
-              <enabled>true</enabled>
-              <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    -->
 
     <reporting>
         <plugins>
