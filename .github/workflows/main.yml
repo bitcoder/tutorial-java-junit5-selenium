@@ -32,7 +32,7 @@ jobs:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v0.0.0
       - name: setup-chromedriver
-        uses: nanasess/setup-chromedriver@v1.0.1
+        uses: nanasess/setup-chromedriver@v2
       - name: Run tests
         run: mvn -s $GITHUB_WORKSPACE/.github/workflows/maven-settings.xml clean compile test
         env:
