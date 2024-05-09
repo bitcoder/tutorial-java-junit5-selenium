@@ -30,7 +30,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v0.0.0
+        uses: browser-actions/setup-chrome@v1
       - name: setup-chromedriver
         uses: nanasess/setup-chromedriver@v2
       - name: Run tests
@@ -43,6 +43,7 @@ jobs:
         if: ${{ false }}
         run: cat reports/TEST-junit-jupiter.xml
       - name: "Import results to Xray (server/DC) using maven plugin"
+        if: ${{ false }}
         run: mvn -s $GITHUB_WORKSPACE/.github/workflows/maven-settings.xml app.getxray:xray-maven-plugin:import-results -Dxray.cloud=false -Dxray.jiraBaseUrl=${{ secrets.JIRASERVER_BASE_URL }} -Dxray.jiraUsername=${{ secrets.JIRASERVER_USERNAME }} -Dxray.jiraPassword=${{ secrets.JIRASERVER_PASSWORD }} -Dxray.projectKey=${{ secrets.JIRASERVER_PROJECT_KEY }} -Dxray.testPlanKey=${{ secrets.XRAYSERVER_TEST_PLAN_KEY }}
         env:
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
@@ -66,8 +67,8 @@ jobs:
           GH_USERNAME: ${{ secrets.GH_USERNAME }}
           GH_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: "Import results to Xray (cloud) using a GH action"
-        if: ${{ false }}
-        uses: mikepenz/xray-action@v2.3.0
+        if: ${{ true }}
+        uses: mikepenz/xray-action@v2.4.5
         with:
            username: "${{ secrets.XRAYCLOUD_CLIENT_ID }}"
            password: "${{ secrets.XRAYCLOUD_CLIENT_SECRET }}"
